@@ -57,8 +57,6 @@ public class DiDiView extends View {
 
     private String notification = "已通知出租车";
 
-    private float currentValue = 0;     // 用于纪录当前的位置,取值范围[0,1]映射Path的整个长度
-
     private float[] pos;                // 当前点的实际位置
     private float[] tan;                // 当前点的tangent值,用于计算图片所需旋转的角度
     private Bitmap mBitmap;             // 箭头图片
@@ -112,8 +110,8 @@ public class DiDiView extends View {
 
         pos = new float[2];
         tan = new float[2];
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        mBitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.point,options);
+        BitmapFactory.Options options = new BitmapFactory.Options();//通过bitmapFactory获取图片资源
+        mBitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.point,options);//获取资源
         mMatrix = new Matrix();
 
     }
@@ -136,29 +134,20 @@ public class DiDiView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.translate(mWidth/2,mHeight/2);
+        canvas.translate(mWidth/2,mHeight/2);//把画布移到屏幕的中心
         rectF = new RectF(-mWidth/2+50,-mWidth/2+50,mWidth/2-50,mWidth/2-50);
-//        canvas.drawArc(rectF,0,360,false,mCirclePaint);
-
 
         Path path = new Path();
-        path.addCircle(0,0,(mWidth-100)/2, Path.Direction.CW);
-        canvas.drawPath(path,mCirclePaint);
+        path.addCircle(0,0,(mWidth-100)/2, Path.Direction.CW);//cw是顺时针
+        canvas.drawPath(path,mCirclePaint);//顺时针的画一个圆
 
 
-        PathMeasure measure = new PathMeasure(path, false);     // 创建 PathMeasure
+        PathMeasure measure = new PathMeasure(path, false);     // 创建 PathMeasure,这是测试path的
 
-        currentValue += 0.005;                                  // 计算当前的位置在总长度上的比例[0,1]
-        if (currentValue >= 1) {
-            currentValue = 0;
-        }
-
-//        float rad = (float) (sweepAngle * (Math.PI/280));
         BigDecimal bigDecimal1 = BigDecimal.valueOf(sweepAngle);
         BigDecimal b2 = BigDecimal.valueOf(360);
-        float rad = bigDecimal1.divide(b2,MathContext.DECIMAL32).floatValue();
+        float rad = bigDecimal1.divide(b2,MathContext.DECIMAL32).floatValue();//通过bigdecimal来获取黄线在灰色圆上的位置，在放黄色的小球
         measure.getPosTan(measure.getLength() * rad +10, pos, tan);// 获取当前位置的坐标以及趋势
-//        measure.getPosTan(rad, pos, tan);        // 获取当前位置的坐标以及趋势
 
         mMatrix.reset();                                                        // 重置Matrix
         float degrees = (float) (Math.atan2(tan[1], tan[0]) * 180.0 / Math.PI); // 计算图片旋转角度
@@ -172,11 +161,13 @@ public class DiDiView extends View {
 
         Rect rectCount = new Rect();
         mTextCountPaint.getTextBounds(String.valueOf(sweepAngle),0,String.valueOf(sweepAngle).length(),rectCount);
-        canvas.drawText(String.valueOf(sweepAngle),-(rect.left+rect.right)/2,rect.bottom-rect.top-rect.bottom-rectCount.top-rectCount.bottom,mTextCountPaint);//写车的数量
+        canvas.drawText(String.valueOf(sweepAngle),-(rect.left+rect.right)/2,rect.bottom-rect.top-rect.bottom-rectCount.top/*-rectCount.bottom*/,mTextCountPaint);//写车的数量
 
-//        Rect rectUnit = new Rect();
-//        mTextUnitPaint.getTextBounds(unit,0,String.valueOf(sweepAngle).length(),rectUnit);
-        canvas.drawText(unit,(rect.left-rect.right)/2+80,rect.bottom-rect.top-rect.bottom-rectCount.top-rectCount.bottom,mTextUnitPaint);//写车的单位
+        canvas.drawText(unit,(rect.left-rect.right)/2+100,rect.bottom-rect.top-rect.bottom-rectCount.top/*-rectCount.bottom*/,mTextUnitPaint);//写车的单位
+//        Log.d(TAG, "onDraw: y=  "+(-rect.top-rectCount.top-rectCount.bottom));
+//        Log.d(TAG, "onDraw: rect.top "+rect.top);
+//        Log.d(TAG, "onDraw: rectCount.top "+rectCount.top);
+//        Log.d(TAG, "onDraw: rectCount.bottom "+rectCount.bottom);
 
         mMatrix.postRotate(-90);
         canvas.drawBitmap(mBitmap, mMatrix, mDrawArcPaint);

@@ -33,7 +33,7 @@ public class DiDiActivity extends Activity {
         TimerTask timeTask = new TimerTask() {
             @Override
             public void run() {
-                if (i>360) {
+                if (i>=360) {
                     i = 0;
                 }
                 Message message = new Message();
@@ -41,7 +41,7 @@ public class DiDiActivity extends Activity {
                 handler.sendMessage(message);
             }
         };
-        timer.schedule(timeTask,1000,100);
+        timer.schedule(timeTask,1000,100);//每100毫秒时候刷新一下，第三个参数
 
     }
 
