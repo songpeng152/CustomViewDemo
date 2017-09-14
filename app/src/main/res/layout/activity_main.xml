@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.sp.customviewdemo.MainActivity">
+
+   <TextView
+       android:id="@+id/tv_pieChart"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="饼状图"
+       android:gravity="center"
+       android:padding="10dp"
+       />
+
+   <View
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:background="#000000"
+       />
+
+   <TextView
+       android:id="@+id/tv_watch"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="钟表"
+       android:padding="10dp"
+       android:gravity="center"
+       />
+
+   <View
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:background="#000000"
+       />
+
+   <TextView
+       android:id="@+id/tv_radar"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="蜘蛛网图（雷达图）"
+       android:padding="10dp"
+       android:gravity="center"
+       />
+
+   <View
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:background="#000000"
+       />
+
+   <TextView
+       android:id="@+id/tv_scan_radar"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="扫描雷达"
+       android:padding="10dp"
+       android:gravity="center"
+       />
+
+   <View
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:background="#000000"
+       />
+
+   <TextView
+       android:id="@+id/tv_bezier_second"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="二阶贝塞尔曲线"
+       android:padding="10dp"
+       android:gravity="center"
+       />
+
+   <View
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:background="#000000"
+       />
+
+   <TextView
+       android:id="@+id/tv_stop_watch"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="码表"
+       android:padding="10dp"
+       android:gravity="center"
+       />
+
+   <View
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:background="#000000"
+       />
+   <TextView
+       android:id="@+id/tv_didi"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="滴滴打车等待的load"
+       android:padding="10dp"
+       android:gravity="center"
+       />
+
+   <View
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:background="#000000"
+       />
+
+</LinearLayout>
